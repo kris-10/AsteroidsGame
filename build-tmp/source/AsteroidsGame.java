@@ -1,3 +1,19 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class AsteroidsGame extends PApplet {
+
 
 SpaceShip pirate = new SpaceShip();
 Star [] north = new Star [100];
@@ -85,8 +101,8 @@ class SpaceShip extends Floater
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;  
-    myDirectionX=.9*myDirectionX;
-    myDirectionY=.9*myDirectionY;   
+    myDirectionX=.9f*myDirectionX;
+    myDirectionY=.9f*myDirectionY;   
 
     //wrap around screen    
     if(myCenterX >width)
@@ -243,3 +259,12 @@ class Star
   }
 }
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "AsteroidsGame" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
