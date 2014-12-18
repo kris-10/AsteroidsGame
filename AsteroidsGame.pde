@@ -1,10 +1,20 @@
 
 SpaceShip pirate = new SpaceShip();
 Star [] north = new Star [100];
+Asteroids[] astra = new Asteroids [15];
+ArrayList <Asteroids> astro = new ArrayList <Asteroids> ();
+
 
 public void setup() 
 {
-  size (400,400);
+  
+  for(int i=0; i<astra.length; i++)
+    {
+      astra[i] = new Asteroids();
+      astro.add(astra[i]);
+    }
+    
+  size (600,600);
   // for(int i=0;i<100;i++)
   // {
   //   north[i]= new Star();
@@ -22,6 +32,13 @@ public void draw()
    north[i]=new Star();
    north[i].show();
  }
+  for(int i=0; i<astra.length; i++)
+  {
+     astro.get(i).move();
+     astro.get(i).show();
+  } 
+
+ 
  System.out.println(pirate.getX() + ", " + pirate.getY());
   //your code here
 }
@@ -118,43 +135,58 @@ being positive or negative. Also make sure to declare appropriately (should it b
 Now add just a single asteroid to your applet. Start by just drawing the asteroid. Make sure you can see it and are happy with its shape before going to the next step.
 Now add the code that moves and rotates the Asteroid
 Modify your applet code so that you have an array of Asteroids.*/
-/*{
-
-  public Asteroids()
-  {
-    corners = 8;
-    xCorners = new int[corners];
-    yCorners = new int[corners];
-    xCorners[0] = -11;
-    yCorners[0] = 0;
-    xCorners[1] = -3;
-    yCorners[1] = 10;
-    xCorners[2] = 6;
-    yCorners[2] = 8;
-    xCorners[3] = 5;
-    yCorners[3] = 0;
-    xCorners[4] = 3;
-    yCorners[4] = -1;
-    xCorners[5] = 5;
-    yCorners[5] = -7;
-    xCorners[6] = 0;
-    yCorners[6] = -13;
-    xCorners[7] = -5; 
-    yCorners[7] = -13;
-    xCorners[8] = -11;
-    yCorners[8] = 0;
-    myColor = color(255);
-    myCenterX = 200;
-    myCenterY = 200;
-    myPointDirection = 0;
-    myDirectionY=0;
-    myDirectionX=0;
-  }
-    public void move ()   //move the floater in the current direction of travel
-    {      
+class Asteroids extends Floater
+{
+  private int rot;
+  public void setX(int x){myCenterX=x;}
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY=y;}
+  public int getY(){return (int)myCenterY;}
+  public void setDirectionX(double x){myDirectionX=x;}
+  public double getDirectionX(){return myDirectionX;}
+  public void setDirectionY(double y){myDirectionY=y;}
+  public double getDirectionY(){return myDirectionY;}
+  public void setPointDirection(int degrees){myPointDirection=degrees;}
+  public double getPointDirection(){return myPointDirection;}
+  
+    public Asteroids()
+    {
+      rot = (int)(((Math.random())*10)-5);
+      corners = 9;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0] = -11;
+      yCorners[0] = 0;
+      xCorners[1] = -3;
+      yCorners[1] = 10;
+      xCorners[2] = 6;
+      yCorners[2] = 8;
+      xCorners[3] = 5;
+      yCorners[3] = 0;
+      xCorners[4] = 3;
+      yCorners[4] = -1;
+      xCorners[5] = 5;
+      yCorners[5] = -7;
+      xCorners[6] = 0;
+      yCorners[6] = -13;
+      xCorners[7] = -5; 
+      yCorners[7] = -13;
+      xCorners[8] = -10;
+      yCorners[8] = 0;
+      myColor = color(150);
+      myCenterX = (int)(Math.random()*600);
+      myCenterY = (int)(Math.random()*600);
+      myPointDirection = 0;
+      myDirectionY=(int)((Math.random()*4)-2);
+      myDirectionX=(int)((Math.random()*4)-2);
+    }
+      public void move ()   //move the floater in the current direction of travel
+      {      
+        rotate(rot);
+        super.move();
+      }   
     
-    }   
-  }*/
+}
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -239,7 +271,7 @@ class Star
   {
     fill(255);
     noStroke();
-    ellipse((int)(Math.random()*400), (int)(Math.random()*400),2,2);
+    ellipse((int)(Math.random()*600), (int)(Math.random()*600),2,2);
   }
 }
 
